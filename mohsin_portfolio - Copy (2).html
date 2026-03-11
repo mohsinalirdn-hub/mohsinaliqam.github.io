@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohsin Ali | Food Safety & QA Consultant</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --green-deep: #0d2b12;
+  --green-mid: #1a4a22;
+  --green-accent: #3d9142;
+  --green-bright: #5cb85c;
+  --green-light: #a8d5aa;
+  --gold: #c9a84c;
+  --gold-light: #e8cc7a;
+  --cream: #f5f0e8;
+  --white: #ffffff;
+  --text-muted: #8aaa8c;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--green-deep);
+  color: var(--cream);
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.4;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 60px;
+  background: rgba(13,43,18,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(61,145,66,0.2);
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 1px;
+}
+.nav-logo span { color: var(--green-accent); }
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--green-light);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--white); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hbc1 {
+  width: 700px; height: 700px;
+  border: 1px solid rgba(61,145,66,0.1);
+  top: -200px; right: -200px;
+}
+.hbc2 {
+  width: 400px; height: 400px;
+  border: 1px solid rgba(61,145,66,0.08);
+  top: -50px; right: 50px;
+}
+.hbc3 {
+  width: 900px; height: 900px;
+  background: radial-gradient(circle, rgba(61,145,66,0.06) 0%, transparent 65%);
+  top: -300px; right: -300px;
+}
+
+.hero-content { max-width: 700px; animation: fadeUp 0.9s ease both; }
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(61,145,66,0.12);
+  border: 1px solid rgba(61,145,66,0.35);
+  border-radius: 30px;
+  padding: 6px 16px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green-bright);
+  margin-bottom: 28px;
+}
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-bright); animation: pulse 2s infinite; }
+
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 7vw, 82px);
+  font-weight: 700;
+  line-height: 1.0;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--green-accent);
+}
+
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--green-light);
+  margin-bottom: 24px;
+  font-style: italic;
+}
+
+.hero-desc {
+  font-size: 15px;
+  color: #aec9b0;
+  max-width: 560px;
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: var(--green-accent);
+  color: white;
+  padding: 14px 32px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  border: 2px solid var(--green-accent);
+}
+.btn-primary:hover { background: var(--green-bright); border-color: var(--green-bright); transform: translateY(-2px); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--green-light);
+  padding: 14px 32px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border: 2px solid rgba(61,145,66,0.4);
+  transition: all 0.3s;
+}
+.btn-outline:hover { border-color: var(--green-accent); color: var(--white); }
+
+/* ── STATS STRIP ── */
+.stats-strip {
+  background: rgba(26,74,34,0.5);
+  border-top: 1px solid rgba(61,145,66,0.2);
+  border-bottom: 1px solid rgba(61,145,66,0.2);
+  padding: 40px 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  animation: fadeUp 1s 0.3s ease both;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 20px;
+  border-right: 1px solid rgba(61,145,66,0.2);
+}
+.stat-item:last-child { border-right: none; }
+
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--green-accent);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.stat-gold { color: var(--gold) !important; }
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* ── SECTIONS ── */
+section { padding: 100px 60px; }
+
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--green-accent);
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 54px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.section-title em { font-style: italic; color: var(--green-accent); }
+
+.section-desc {
+  font-size: 15px;
+  color: #aec9b0;
+  max-width: 580px;
+  margin-bottom: 60px;
+}
+
+/* ── SERVICES ── */
+#services { background: rgba(0,0,0,0.15); }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.service-card {
+  background: rgba(26,74,34,0.3);
+  border: 1px solid rgba(61,145,66,0.2);
+  border-radius: 8px;
+  padding: 36px 30px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--green-accent), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s;
+}
+.service-card:hover { border-color: rgba(61,145,66,0.5); transform: translateY(-4px); background: rgba(26,74,34,0.5); }
+.service-card:hover::before { transform: scaleX(1); }
+
+.service-icon { font-size: 32px; margin-bottom: 20px; }
+.service-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+.service-desc { font-size: 13px; color: #aec9b0; line-height: 1.7; }
+
+/* ── EXPERIENCE ── */
+.timeline { position: relative; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 8px; bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--green-accent), rgba(61,145,66,0.1));
+}
+
+.timeline-item {
+  padding-left: 40px;
+  margin-bottom: 60px;
+  position: relative;
+  animation: fadeLeft 0.6s ease both;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -6px; top: 6px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--green-accent);
+  border: 3px solid var(--green-deep);
+}
+
+.timeline-date {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green-accent);
+  margin-bottom: 6px;
+}
+.timeline-role {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.timeline-company {
+  font-size: 14px;
+  color: var(--green-light);
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+
+.timeline-achievements {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.timeline-achievements li {
+  font-size: 13px;
+  color: #aec9b0;
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.6;
+}
+.timeline-achievements li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--green-accent);
+  font-size: 12px;
+}
+
+/* ── HIGHLIGHT BOX ── */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(201,168,76,0.1), rgba(201,168,76,0.05));
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 8px;
+  padding: 20px 24px;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.highlight-box .hl-icon { font-size: 28px; }
+.highlight-box .hl-text { font-size: 14px; color: var(--gold-light); line-height: 1.5; }
+.highlight-box .hl-text strong { font-weight: 600; display: block; margin-bottom: 2px; }
+
+/* ── CERTIFICATIONS ── */
+#certifications { background: rgba(0,0,0,0.15); }
+
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.cert-card {
+  background: rgba(26,74,34,0.25);
+  border: 1px solid rgba(61,145,66,0.2);
+  border-radius: 8px;
+  padding: 28px 24px;
+  text-align: center;
+  transition: all 0.3s;
+}
+.cert-card:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); transform: translateY(-3px); }
+.cert-icon { font-size: 36px; margin-bottom: 14px; }
+.cert-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.cert-body { font-size: 12px; color: var(--text-muted); letter-spacing: 1px; }
+
+/* ── SKILLS ── */
+.skills-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+.skills-group-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--green-light);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(61,145,66,0.2);
+}
+.skill-item { margin-bottom: 20px; }
+.skill-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.skill-name { font-size: 13px; font-weight: 500; color: var(--cream); }
+.skill-pct { font-size: 13px; color: var(--green-accent); font-weight: 600; }
+.skill-bar { height: 4px; background: rgba(61,145,66,0.15); border-radius: 2px; overflow: hidden; }
+.skill-fill { height: 100%; background: linear-gradient(to right, var(--green-accent), var(--green-bright)); border-radius: 2px; transition: width 1s ease; }
+
+.tags-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.skill-tag {
+  background: rgba(61,145,66,0.12);
+  border: 1px solid rgba(61,145,66,0.25);
+  color: var(--green-light);
+  font-size: 12px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* ── EDUCATION ── */
+#education { background: rgba(0,0,0,0.15); }
+.edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.edu-card {
+  background: rgba(26,74,34,0.25);
+  border: 1px solid rgba(61,145,66,0.2);
+  border-radius: 8px;
+  padding: 36px 30px;
+}
+.edu-year { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--green-accent); margin-bottom: 10px; }
+.edu-degree {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.edu-uni { font-size: 14px; color: var(--green-light); }
+
+/* ── CONTACT ── */
+#contact {
+  background: linear-gradient(135deg, rgba(26,74,34,0.4), rgba(13,43,18,0.8));
+  border-top: 1px solid rgba(61,145,66,0.2);
+  text-align: center;
+}
+.contact-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.contact-icon { font-size: 28px; }
+.contact-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
+.contact-value { font-size: 14px; color: var(--green-light); font-weight: 500; }
+.contact-value a { color: inherit; text-decoration: none; }
+.contact-value a:hover { color: var(--white); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 24px 60px;
+  border-top: 1px solid rgba(61,145,66,0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: var(--green-light);
+}
+.footer-copy { font-size: 12px; color: var(--text-muted); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  section, .hero, .stats-strip { padding: 60px 24px; }
+  .services-grid, .certs-grid, .skills-layout, .edu-grid { grid-template-columns: 1fr; }
+  .stats-strip { grid-template-columns: 1fr 1fr; }
+  .stat-item { border-right: none; border-bottom: 1px solid rgba(61,145,66,0.2); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Mohsin <span>Ali</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hbc1 hero-bg-circle"></div>
+  <div class="hbc2 hero-bg-circle"></div>
+  <div class="hbc3 hero-bg-circle"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span class="dot"></span> Available for Freelance · UK-Based</div>
+    <h1>Food Safety &<br><em>QA Expert</em></h1>
+    <p class="hero-sub">MSc Food Science · BRCGS AA Grade · HACCP Level 4</p>
+    <p class="hero-desc">Quality Assurance Manager with 3+ years of experience in food manufacturing and safety compliance. I help food businesses achieve full regulatory compliance, pass audits, and build robust food safety systems.</p>
+    <div class="hero-cta">
+      <a href="#services" class="btn-primary">View Services</a>
+      <a href="#contact" class="btn-outline">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-num stat-gold">AA</div>
+    <div class="stat-label">BRCGS Grade Achieved</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">3+</div>
+    <div class="stat-label">Years Experience</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Compliance Rate</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5+</div>
+    <div class="stat-label">Certifications</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-eyebrow">What I Offer</div>
+  <h2 class="section-title">Professional <em>Services</em></h2>
+  <p class="section-desc">Comprehensive food safety and quality assurance consulting tailored to your business needs.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🔍</div>
+      <div class="service-title">Food Safety Audits</div>
+      <div class="service-desc">Internal and external audits including BRCGS, GMP, and HACCP. Full preparation, evidence collation, corrective actions, and technical reporting.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📋</div>
+      <div class="service-title">HACCP Plan Development</div>
+      <div class="service-desc">Full HACCP system design and implementation from scratch. Hazard analysis, critical control points, monitoring procedures, and corrective actions.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">⚠️</div>
+      <div class="service-title">Allergen Management</div>
+      <div class="service-desc">Allergen risk assessments, controls, labelling compliance, and gluten-free positive release verification. Protecting your customers and your business.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📄</div>
+      <div class="service-title">SOP & Documentation</div>
+      <div class="service-desc">Standard Operating Procedures, quality manuals, document control systems, and KPI reporting frameworks tailored to your operation.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🏥</div>
+      <div class="service-title">EHO Inspection Prep</div>
+      <div class="service-desc">Get your site ready for Environmental Health Officer visits. Documentation, hygiene standards, corrective actions, and mock inspection walkthroughs.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎓</div>
+      <div class="service-title">Staff Food Safety Training</div>
+      <div class="service-desc">Engaging training sessions on CCPs, hygiene standards, allergen awareness, metal detector protocols, and handwashing procedures.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔬</div>
+      <div class="service-title">Microbiological Testing</div>
+      <div class="service-desc">Environmental swabbing programmes, lab testing coordination, and microbiological risk assessment for food production environments.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔄</div>
+      <div class="service-title">Traceability & Mock Recalls</div>
+      <div class="service-desc">Full traceability system design and mock recall exercises including provenance trace-back to farm level, meeting BRCGS requirements.</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <div class="service-title">QA Consulting & KPI Reporting</div>
+      <div class="service-desc">Monthly KPI analysis, continuous improvement planning, customer complaint investigation, and food safety management system setup.</div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-eyebrow">Career History</div>
+  <h2 class="section-title">Work <em>Experience</em></h2>
+  <p class="section-desc">A track record of delivering measurable results in food safety and quality assurance.</p>
+
+  <div class="highlight-box">
+    <div class="hl-icon">🏆</div>
+    <div class="hl-text">
+      <strong>Key Achievement: BRCGS AA Grade — January 2026</strong>
+      Supported a successful BRCGS audit at Around Noon, achieving the highest possible grade — a testament to rigorous quality systems and compliance management.
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">August 2024 – Present</div>
+      <div class="timeline-role">QA Manager</div>
+      <div class="timeline-company">Around Noon · Food Manufacturing</div>
+      <ul class="timeline-achievements">
+        <li>Supported internal and external BRCGS audits achieving prestigious AA grade (Jan 2026)</li>
+        <li>Conducted bi-monthly GMP audits ensuring compliance with internal and external standards</li>
+        <li>Led monthly traceability and mock recall exercises including full farm-level trace-back</li>
+        <li>Managed 6+ FMS trackers including gluten-free, taste panel, and product conformity</li>
+        <li>Investigated and resolved up to 4 customer complaints per week related to food safety</li>
+        <li>Conducted weekly gluten-free swabbing and microbiological testing coordination</li>
+        <li>Compiled and analysed monthly KPI reports to drive continuous improvement</li>
+        <li>Led weekly team meetings and conducted monthly glass, hard plastic, and fabrication audits</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">September 2023 – December 2024</div>
+      <div class="timeline-role">QA Auditor</div>
+      <div class="timeline-company">Band of Burgers · Restaurant Group (3 Locations)</div>
+      <ul class="timeline-achievements">
+        <li>Achieved 100% compliance across 3 restaurant locations with zero violations over 6 months</li>
+        <li>Conducted regular inspections of 6+ kitchens, storage, and dining areas</li>
+        <li>Trained 30+ staff on food handling, hygiene, and safety procedures</li>
+        <li>Reduced contamination incidents by 75% within 6 months through improved labelling system</li>
+        <li>Prepared sites for EHO visits; maintained documentation and corrective actions</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">August 2021 – May 2023</div>
+      <div class="timeline-role">Consultant Nutritionist</div>
+      <div class="timeline-company">Bhati International Hospital</div>
+      <ul class="timeline-achievements">
+        <li>Conducted comprehensive nutritional assessments for 100+ individuals</li>
+        <li>Developed personalised nutrition plans for 30+ clients with specific health goals</li>
+        <li>Achieved 15% improvement in health outcomes within 3 months through data-driven plans</li>
+        <li>Led 15+ group nutrition workshops educating 300+ participants on healthy eating</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-eyebrow">Qualifications</div>
+  <h2 class="section-title">Certifications &amp; <em>Credentials</em></h2>
+  <p class="section-desc">Industry-recognised qualifications that underpin every service I deliver.</p>
+  <div class="certs-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🥇</div>
+      <div class="cert-title">Level 4 HACCP</div>
+      <div class="cert-body">Manufacturing · Highest Level</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔎</div>
+      <div class="cert-title">Internal Audit Manager</div>
+      <div class="cert-body">Food Safety Auditing</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🍽️</div>
+      <div class="cert-title">Level 3 Food Hygiene</div>
+      <div class="cert-body">Advanced Food Safety</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">⚠️</div>
+      <div class="cert-title">Food Allergen Management</div>
+      <div class="cert-body">Allergen Risk & Compliance</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🦺</div>
+      <div class="cert-title">Health & Safety for Managers</div>
+      <div class="cert-body">Workplace Safety Management</div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🎓</div>
+      <div class="cert-title">MSc Food Science</div>
+      <div class="cert-body">London Metropolitan University · 2024</div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-eyebrow">Expertise</div>
+  <h2 class="section-title">Core <em>Skills</em></h2>
+  <p class="section-desc">A blend of technical food science knowledge and practical compliance expertise.</p>
+  <div class="skills-layout">
+    <div>
+      <div class="skills-group-title">QA & Compliance</div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">BRCGS Auditing</span><span class="skill-pct">95%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">HACCP Implementation</span><span class="skill-pct">95%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">GMP Compliance</span><span class="skill-pct">90%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Allergen Management</span><span class="skill-pct">90%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span class="skill-name">Traceability Systems</span><span class="skill-pct">88%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+      </div>
+    </div>
+    <div>
+      <div class="skills-group-title">Technical Tools & Knowledge</div>
+      <div class="tags-list">
+        <span class="skill-tag">Microbiological Testing</span>
+        <span class="skill-tag">Sensory Evaluation</span>
+        <span class="skill-tag">Label & Spec Checks</span>
+        <span class="skill-tag">FMS Systems</span>
+        <span class="skill-tag">Microsoft Excel</span>
+        <span class="skill-tag">Document Control</span>
+        <span class="skill-tag">KPI Reporting</span>
+        <span class="skill-tag">ISO 22000</span>
+        <span class="skill-tag">Product Conformity</span>
+        <span class="skill-tag">Customer Complaints</span>
+        <span class="skill-tag">Risk Assessment</span>
+        <span class="skill-tag">Staff Training</span>
+        <span class="skill-tag">EHO Liaison</span>
+        <span class="skill-tag">Mock Recalls</span>
+        <span class="skill-tag">FSMS</span>
+        <span class="skill-tag">HPLC Analysis</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-eyebrow">Academic Background</div>
+  <h2 class="section-title">Education &amp; <em>Training</em></h2>
+  <p class="section-desc">A strong academic foundation combined with practical industry expertise.</p>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-year">2024 · London, UK</div>
+      <div class="edu-degree">MSc Food Science</div>
+      <div class="edu-uni">London Metropolitan University</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2022</div>
+      <div class="edu-degree">BSc (Hons) Human Nutrition & Dietetics</div>
+      <div class="edu-uni">GCUF</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-eyebrow">Let's Work Together</div>
+  <h2 class="section-title">Get In <em>Touch</em></h2>
+  <p class="section-desc" style="margin: 0 auto; text-align:center;">Ready to make your food business safer and audit-ready? Reach out today.</p>
+  <div class="contact-grid">
+    <div class="contact-item">
+      <div class="contact-icon">📱</div>
+      <div class="contact-label">Phone</div>
+      <div class="contact-value">07774 069 313</div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">✉️</div>
+      <div class="contact-label">Email</div>
+      <div class="contact-value"><a href="mailto:mohsinaliukni@gmail.com">mohsinaliukni@gmail.com</a></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">💼</div>
+      <div class="contact-label">LinkedIn</div>
+      <div class="contact-value"><a href="https://linkedin.com/in/mohsin-ali-28b0a2201" target="_blank">linkedin.com/in/mohsin-ali</a></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📍</div>
+      <div class="contact-label">Location</div>
+      <div class="contact-value">United Kingdom</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Mohsin Ali · Food Safety & QA Consultant</div>
+  <div class="footer-copy">© 2026 · Available for Freelance Projects</div>
+</footer>
+
+</body>
+</html>
